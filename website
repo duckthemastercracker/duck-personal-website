@@ -1,66 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duck's Personal Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1em 0;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            margin: 0 1em;
-            text-decoration: none;
-        }
-        .container {
-            padding: 2em;
-            text-align: center;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Site</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+    body {
+      background: #f5f5f5;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 30px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #00bfff;
+    }
+    .hero {
+      height: 100vh;
+      background: linear-gradient(to right, #00bfff, #1e90ff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      animation: fadeDown 1s ease-in-out forwards;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin: 15px 0;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .hero button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: #1e90ff;
+      cursor: pointer;
+      transition: 0.3s;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 1s;
+    }
+    .hero button:hover {
+      background: #f0f0f0;
+      transform: scale(1.05);
+    }
+    section {
+      padding: 100px 50px;
+      min-height: 100vh;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes fadeDown {
+      from {opacity: 0; transform: translateY(-30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    footer {
+      padding: 20px;
+      background: #222;
+      color: white;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Duck</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-
-    <div id="home" class="container">
-        <h2>Welcome to Duck's Personal Website</h2>
-        <img src="path/to/duck-with-bread.jpg" alt="A duck walking with bread">
-        <p>Excellent coder</p>
+  <nav>
+    <h2>MySite</h2>
+    <div>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
     </div>
+  </nav>
 
-    <div id="about" class="container">
-        <h2>About Me</h2>
-        <h3>Skills</h3>
-        <p>Coding</p>
-        <h3>Hobbies</h3>
-        <p>Coding</p>
-        <h3>Achievements</h3>
-        <p>Master coder</p>
-    </div>
+  <div class="hero">
+    <h1>Welcome to My Interactive Site</h1>
+    <p>This site has smooth animations and a modern look</p>
+    <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Explore</button>
+  </div>
 
-    <div id="contact" class="container">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:therealwiicxked@gmail.com">therealwiicxked@gmail.com</a></p>
-    </div>
+  <section id="about">
+    <h2>About</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. This section fades in as you scroll.</p>
+  </section>
+
+  <section id="services">
+    <h2>Services</h2>
+    <p>Here you can list cool features or things your site offers. Notice the smooth scroll animations!</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Put your contact details or a form here.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 My Interactive Site</p>
+  </footer>
+
+  <script>
+    // Scroll animation
+    const sections = document.querySelectorAll("section");
+    const reveal = () => {
+      const trigger = window.innerHeight * 0.8;
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < trigger) {
+          sec.classList.add("show");
+        }
+      });
+    };
+    window.addEventListener("scroll", reveal);
+    reveal();
+  </script>
 </body>
 </html>
